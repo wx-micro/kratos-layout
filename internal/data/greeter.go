@@ -3,7 +3,7 @@ package data
 import (
 	"context"
 
-	"github.com/zero-one-cloud/shop-layout/internal/biz"
+	"github.com/zero-one-cloud/layout/internal/biz"
 
 	"github.com/go-kratos/kratos/v2/log"
 )

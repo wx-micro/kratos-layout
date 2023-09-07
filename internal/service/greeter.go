@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	v1 "github.com/zero-one-cloud/shop-layout/api/helloworld/v1"
-	"github.com/zero-one-cloud/shop-layout/internal/biz"
+	v1 "github.com/zero-one-cloud/layout/api/helloworld/v1"
+	"github.com/zero-one-cloud/layout/internal/biz"
 )
 
 // GreeterService is a greeter service.

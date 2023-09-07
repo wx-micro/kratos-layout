@@ -4,7 +4,7 @@
 
 ## How to use 
 ```
-kratos new helloworld -r https://github.com/zero-one-cloud/shop-layout.git
+kratos new helloworld -r https://github.com/zero-one-cloud/layout.git
 ```
 
 

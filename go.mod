@@ -1,4 +1,4 @@
-module github.com/zero-one-cloud/shop-layout
+module github.com/zero-one-cloud/layout
 
 go 1.20
 
