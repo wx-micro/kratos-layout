@@ -1,8 +1,8 @@
 package server
 
 import (
-	"errors"
 	"fmt"
+	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/transport/http"
 	"google.golang.org/protobuf/proto"
 	stdhttp "net/http"
@@ -18,33 +18,27 @@ func (e *HTTPError) Error() string {
 	return fmt.Sprintf("HTTPError code: %d message: %s", e.Code, e.Message)
 }
 
-// FromError try to convert an error to *HTTPError.
-func FromError(err error) *HTTPError {
-	if err == nil {
-		return nil
-	}
-	if se := new(HTTPError); errors.As(err, &se) {
-		return se
-	}
-	return &HTTPError{Code: 500, Message: err.Error()}
-}
-
 func errorEncoder(w stdhttp.ResponseWriter, r *stdhttp.Request, err error) {
-	se := FromError(err)
+	se := errors.FromError(err)
 	codec, _ := http.CodecForRequest(r, "Accept")
-	body, err := codec.Marshal(se)
+
+	errBody := &HTTPError{
+		Code:    int(se.Code),
+		Message: se.Message,
+	}
+
+	body, err := codec.Marshal(errBody)
 	if err != nil {
-		w.WriteHeader(500)
+		w.WriteHeader(stdhttp.StatusInternalServerError)
 		return
 	}
+
+	if se.Code > 99 && se.Code < 600 {
+		w.WriteHeader(stdhttp.StatusOK)
+	} else {
+		w.WriteHeader(stdhttp.StatusInternalServerError)
+	}
 	w.Header().Set("Content-Type", "application/"+codec.Name())
-	// todo: 判断系统错误和业务错误
-	//if se.Code > 99 && se.Code < 600 {
-	//	w.WriteHeader(se.Code)
-	//} else {
-	//	w.WriteHeader(500)
-	//}
-	w.WriteHeader(se.Code)
 	_, _ = w.Write(body)
 }
 
