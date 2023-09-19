@@ -32,7 +32,7 @@ type GreeterUseCase struct {
 }
 
 func NewGreeterUseCase(repo GreeterRepo, logger log.Logger) *GreeterUseCase {
-	return &GreeterUseCase{repo: repo, log: log.NewHelper(logger)}
+	return &GreeterUseCase{repo: repo, log: log.NewHelper(log.With(logger, "module", "biz/GreeterUseCase"))}
 }
 
 // CreateGreeter creates a Greeter, and returns the new Greeter.
