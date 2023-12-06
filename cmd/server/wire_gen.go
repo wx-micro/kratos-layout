@@ -9,11 +9,11 @@ package main
 import (
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
-	"github.com/zero-one-cloud/layout/internal/biz"
-	"github.com/zero-one-cloud/layout/internal/conf"
-	"github.com/zero-one-cloud/layout/internal/data"
-	"github.com/zero-one-cloud/layout/internal/server"
-	"github.com/zero-one-cloud/layout/internal/service"
+	"github.com/wx-micro/layout/internal/biz"
+	"github.com/wx-micro/layout/internal/conf"
+	"github.com/wx-micro/layout/internal/data"
+	"github.com/wx-micro/layout/internal/server"
+	"github.com/wx-micro/layout/internal/service"
 )
 
 import (

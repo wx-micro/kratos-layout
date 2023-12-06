@@ -6,7 +6,7 @@ import (
 	"github.com/go-kratos/kratos/v2/registry"
 	"github.com/go-redis/redis/v8"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/zero-one-cloud/layout/internal/conf"
+	"github.com/wx-micro/layout/internal/conf"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"time"

@@ -1,7 +1,7 @@
 syntax = "proto3";
 package kratos.api;
 
-option go_package = "github.com/zero-one-cloud/layout/internal/conf;conf";
+option go_package = "github.com/wx-micro/layout/internal/conf;conf";
 
 import "google/protobuf/duration.proto";
 
@@ -11,6 +11,7 @@ message Bootstrap {
   Trace trace = 3;
   Server server = 4;
   Data data = 5;
+  Zap  log = 6;
 }
 
 message Service {
@@ -62,4 +63,13 @@ message Registry {
 
 message Trace {
   string endpoint = 1;
+}
+
+message Zap {
+  string level = 1;
+  string format = 2;
+  string prefix = 3;
+  string director = 4;
+  string encodeLevel = 5;
+  string linkName = 6;
 }

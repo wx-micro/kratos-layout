@@ -3,11 +3,13 @@ package main
 import (
 	"flag"
 	"github.com/go-kratos/kratos/v2/encoding/json"
+	"github.com/wx-micro/layout/pkg/zaplog"
 	"google.golang.org/protobuf/encoding/protojson"
 	"os"
 
-	"github.com/zero-one-cloud/layout/internal/conf"
+	"github.com/wx-micro/layout/internal/conf"
 
+	kratoszap "github.com/go-kratos/kratos/contrib/log/zap/v2"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"
 	"github.com/go-kratos/kratos/v2/config/file"
@@ -27,12 +29,14 @@ var (
 	Version string
 	// flagconf is the config flag.
 	flagconf string
+	Zaplog   string
 
 	id, _ = os.Hostname()
 )
 
 func init() {
 	flag.StringVar(&flagconf, "conf", "../../configs", "config path, eg: -conf config.yaml")
+	flag.StringVar(&Zaplog, "log", "../../logs", "log path, eg: -log logs")
 
 	json.MarshalOptions = protojson.MarshalOptions{
 		EmitUnpopulated: true, // 默认值不忽略
@@ -76,8 +80,13 @@ func main() {
 	// 生成服务名称，服务发现
 	Name = bc.Service.Name
 	Version = bc.Service.Version
+
+	// 修改全局日志为zap
+	z := zaplog.Zap(bc.Log)
+	defer z.Sync()
+	zl := kratoszap.NewLogger(z)
 	// 设置日志格式与内容
-	logger := log.With(log.NewStdLogger(os.Stdout),
+	logger := log.With(zl,
 		"ts", log.DefaultTimestamp,
 		"caller", log.DefaultCaller,
 		"service.id", id,

@@ -3,7 +3,7 @@ package biz
 import (
 	"context"
 
-	v1 "github.com/zero-one-cloud/layout/api/helloworld/v1"
+	v1 "github.com/wx-micro/layout/api/helloworld/v1"
 
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/log"

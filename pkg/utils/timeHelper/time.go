@@ -17,9 +17,14 @@ func CurrentTimeHI() string {
 	return time.Now().Format("15:04")
 }
 
-// CurrentTimeH 获取时
+// CurrentTimeH 获取当前时
 func CurrentTimeH() string {
 	return time.Now().Format("15")
+}
+
+// CurrentMin 获取当前分
+func CurrentMin() string {
+	return time.Now().Format("04")
 }
 
 // CurrentTimeHIS 获取时分秒
