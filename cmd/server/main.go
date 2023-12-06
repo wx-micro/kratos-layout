@@ -29,14 +29,12 @@ var (
 	Version string
 	// flagconf is the config flag.
 	flagconf string
-	Zaplog   string
 
 	id, _ = os.Hostname()
 )
 
 func init() {
 	flag.StringVar(&flagconf, "conf", "../../configs", "config path, eg: -conf config.yaml")
-	flag.StringVar(&Zaplog, "log", "../../logs", "log path, eg: -log logs")
 
 	json.MarshalOptions = protojson.MarshalOptions{
 		EmitUnpopulated: true, // 默认值不忽略
